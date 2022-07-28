@@ -1,5 +1,5 @@
 let http = new XMLHttpRequest();
-http.open('GET', 'https://raw.githubusercontent.com/Vinayak409/Assignment/master/posts.json', true);
+http.open('GET', 'posts.json', true);
 http.send();
 http.onload = function () {
     if (http.readyState == 4 && http.status == 200) {
