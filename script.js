@@ -1,21 +1,27 @@
 let http = new XMLHttpRequest();
 http.open('GET', 'https://raw.githubusercontent.com/Vinayak409/Assignment/master/posts.json', true);
 http.send();
-http.onload =  function(){
-    if(this.readyState==4 && this.status==200){
-        let blogs = JSON.parse(this.responseText);
+http.onload = function () {
+    if (http.readyState == 4 && http.status == 200) {
+        let blogs = JSON.parse(http.responseText);
         let output = "";
-        for(let cards of Object.keys(blogs)){
+        blogs.posts.forEach(cards => {
             output += `
                 <div class = "blogs">
                     <img src="${cards.img}" alt="${cards.img}">
-                    <p class="title">${cards.title}</p>
-                    <p class="desctiption">${cards.desc}</p>
-                    <p class="comment">${cards.comment_count}</p>
+                    <ul class="comment">
+                        <li><a href="#"><i class="fa fa-user"></i></a> by: <span> ${cards.author}</span></li>
+                        <li><a href=""><i class="fa fa-comment"></i></a> <span>${cards.comment_count}</span></li>
+                    </ul>
+                    <h2 class="title"><a href="#">${cards.title}</a></h2>
+                    <p class="description">${cards.desc}</p>
+                    <p class="read-more"><a href="#">Read More...</a></p>
+                    <a href="#" class="date">${cards.datetime}</a>
                 </div>
                 `
-        }
+        });
         document.querySelector(".blogs").innerHTML = output;
     }
 }
+
 
